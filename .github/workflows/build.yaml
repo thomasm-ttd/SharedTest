@@ -3,9 +3,4 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build
-        run: mvn -B clean compile test
+    uses: thomasm-ttd/.github/workflows/sharedbuild.yaml
