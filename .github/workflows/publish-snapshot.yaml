@@ -5,12 +5,12 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/workflows/download_gpg_key
-        with:
-          key: ${{ secrets.GPG_KEY }}
+      #- uses: actions/checkout@v2
+      #- uses: ./.github/workflows/download_gpg_key
+      #  with:
+      #    key: ${{ secrets.GPG_KEY }}
       - name: Check Version is snapshot
-        id: check_verion
+        id: check_version
         uses: ./.github/workflows/check_version
         with:
           needs_snapshot: 'true'
