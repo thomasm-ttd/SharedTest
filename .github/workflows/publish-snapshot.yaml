@@ -15,4 +15,4 @@ jobs:
         with:
           needs_snapshot: 'true'
       - name: Deploy Snapshot
-        run: mvn -B clean deploy compile test
+        run: mvn -B clean compile test
