@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.uid2</groupId>
@@ -14,12 +13,12 @@
     <packaging>jar</packaging>
 
     <licenses>
-      <license>
-        <name>The Apache License, Version 2.0</name>
-        <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      </license>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
     </licenses>
-    
+
     <developers>
         <developer>
             <name>UID2 team</name>
@@ -29,16 +28,16 @@
         </developer>
     </developers>
     <scm>
-      <connection>scm:get:ssh://github.com:IABTechLab/uid2-shared.git</connection>
-      <developerConnection>scm:get:ssh://github.com:IABTechLab/uid2-shared.git</developerConnection>
-      <url>https://github.com/IABTechLab/uid2-shared</url>
+        <connection>scm:get:ssh://github.com:IABTechLab/uid2-shared.git</connection>
+        <developerConnection>scm:get:ssh://github.com:IABTechLab/uid2-shared.git</developerConnection>
+        <url>https://github.com/IABTechLab/uid2-shared</url>
     </scm>
 
     <distributionManagement>
-      <snapshotRepository>
-        <id>ossrh</id>
-        <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-      </snapshotRepository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <properties>
@@ -185,17 +184,17 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-	    <plugin>
-	      <groupId>org.sonatype.plugins</groupId>
-	      <artifactId>nexus-staging-maven-plugin</artifactId>
-	      <version>1.6.7</version>
-	      <extensions>true</extensions>
-	      <configuration>
-	         <serverId>ossrh</serverId>
-	         <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-	         <autoReleaseAfterClose>false</autoReleaseAfterClose>
-	      </configuration>
-            </plugin>
+            <!-- <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -225,19 +224,19 @@
                     </execution>
                 </executions>
             </plugin>
-      	    <plugin>
-      	      <groupId>org.apache.maven.plugins</groupId>
-      	      <artifactId>maven-javadoc-plugin</artifactId>
-      	      <version>3.3.2</version>
-	      <executions>
-                <execution>
-                  <id>attach-javadocs</id>
-                    <goals>
-                      <goal>jar</goal>
-                    </goals>
-                </execution>
-              </executions>
-      	    </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
