@@ -3,4 +3,4 @@ on: [push]
 
 jobs:
   build:
-    uses: thomasm-ttd/.github/workflows/sharedbuild.yaml
+    uses: thomasm-ttd/.github/workflows/sharedbuild.yaml@main
