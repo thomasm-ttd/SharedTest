@@ -8,4 +8,4 @@ on:
 
 jobs:
   build:
-    uses: thomasm-ttd/.github/.github/workflows/sharedbuild.yaml@main
+    uses: thomasm-ttd/SharedWorkflows/.github/workflows/sharedbuild.yaml@main
