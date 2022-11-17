@@ -3,7 +3,7 @@ on: workflow_dispatch
 
 jobs:
   publish:
-    uses: thomasm-ttd/SharedWorkflows/.github/workflows/publish-snapshot.yaml@main
+    uses: thomasm-ttd/SharedWorkflows/workflows/publish-snapshot.yaml@main
 
     #runs-on: ubuntu-latest
     #steps:
