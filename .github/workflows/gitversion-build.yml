@@ -43,6 +43,5 @@ jobs:
           add: 'pom.xml'
           author_name: Release Workflow
           author_email: unifiedid-admin+release@thetradedesk.com
-          push: '--set-upstream origin release-${{ steps.version.outputs.new_ver }}'
-          message: 'release-branch-${{ steps.version.outputs.new_ver }}'
+          message: 'Updated version to ${{ steps.version.outputs.new_ver }}'
 
