@@ -1,4 +1,4 @@
-name: Git Version Test
+name: Git Snapshot Version Test
 
 on:
   workflow_dispatch:
