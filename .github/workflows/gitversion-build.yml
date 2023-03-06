@@ -28,7 +28,7 @@ jobs:
       - name: Update pom.xml
         run: |
           current_version=$(grep -o '<version>.*</version>' pom.xml | head -1 | sed 's/<version>\(.*\)<\/version>/\1/')
-          new_version=$NBGV_CloudBuildNumber
+          new_version="$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
           sed -i "s/$current_version/$new_version/g" pom.xml
           echo "Version number updated from $current_version to $new_version"
 
