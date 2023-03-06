@@ -1,4 +1,4 @@
-name: Git Version Test
+name: Release Minor Version
 
 on:
   workflow_dispatch:
@@ -13,6 +13,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Update Minor Version
+        run: |
+          old_ver=$(jq '.version' version.json | tr -d '"')
+          new_ver=$(echo $old_ver | awk -F. -v OFS=. '{$FF++; print $0}') # major
+          new_ver=$(echo $old_ver | awk -F. -v OFS=. '{$NF++; print $0}') # minor
+          new_ver=\"$new_ver\"
+          echo $(jq ".version=$new_ver" version.json) > version.json
+
       - name: Set Version
         uses: dotnet/nbgv@master
         with:
@@ -25,7 +33,7 @@ jobs:
         id: version
         run: |
           current_version=$(grep -o '<version>.*</version>' pom.xml | head -1 | sed 's/<version>\(.*\)<\/version>/\1/')
-          new_version="$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
+          new_version="$NBGV_SimpleVersion-SNAPSHOT"
           sed -i "s/$current_version/$new_version/g" pom.xml
           echo "Version number updated from $current_version to $new_version"
           echo "::set-output name=new_ver::$new_version"
@@ -33,10 +41,10 @@ jobs:
       - name: Build and Run Unit Tests
         run: mvn -B clean compile test
 
-      - name: Commit Pom.xml
+      - name: Commit Pom.xml and version.json
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'pom.xml'
+          add: 'pom.xml version.json'
           author_name: Release Workflow
           author_email: unifiedid-admin+release@thetradedesk.com
           message: 'Updated version to ${{ steps.version.outputs.new_ver }}'
