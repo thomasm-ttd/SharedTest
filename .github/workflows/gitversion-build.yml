@@ -34,3 +34,13 @@ jobs:
 
       - name: Build and Run Unit Tests
         run: mvn -B clean compile test
+
+      - name: Commit Pom.xml
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'pom.xml'
+          author_name: Release Workflow
+          author_email: unifiedid-admin+release@thetradedesk.com
+          push: "--set-upstream origin release-$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
+          message: "release-branch-$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
+
