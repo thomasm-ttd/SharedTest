@@ -23,6 +23,7 @@ jobs:
           setAllVars: true
       
       - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
+      - run: env
 
       - name: Build and Run Unit Tests
         run: mvn -B clean compile test
