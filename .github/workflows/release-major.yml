@@ -16,7 +16,7 @@ jobs:
       - name: Update Minor Version
         run: |
           old_ver=$(jq '.version' version.json | tr -d '"')
-          new_ver=$(echo $old_ver | awk -F. -v OFS=. '{$NF++; print $0}') # minor
+          new_ver=$(echo $old_ver | awk -F. -v OFS=. '{$FF++; print $0}') # major
           new_ver=\"$new_ver\"
           echo $(jq ".version=$new_ver" version.json) > version.json
 
