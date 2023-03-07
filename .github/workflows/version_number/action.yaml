@@ -44,7 +44,6 @@ runs:
 
     - name: Set version number for snapshot
       id: version
-      if: inputs.type == 'Snapshot'
       shell: bash
       run: |
         if [[ "${{ github.event.inputs.type}}" == "Snapshot"]]; then
