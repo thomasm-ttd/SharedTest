@@ -13,14 +13,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Update Major Version
-        run: |
-          old_ver=$(jq '.version' version.json | tr -d '"')
-          new_ver=$(echo $old_ver | cut -d'.' -f 1) #get the major number
-          new_ver=$(echo $(expr $new_ver + 1))      #increment
-          new_ver=$(echo $new_ver.0)                #set minor version to 0
-          new_ver=\"$new_ver\"
-          echo $(jq ".version=$new_ver" version.json) > version.json
+      - name: Test action
+        id: test
+        uses: ./.github/workflows/version_number
+        with:
+          type: 'Major'
 
       - name: Set Version
         uses: dotnet/nbgv@master
@@ -34,10 +31,9 @@ jobs:
         id: version
         run: |
           current_version=$(grep -o '<version>.*</version>' pom.xml | head -1 | sed 's/<version>\(.*\)<\/version>/\1/')
-          new_version="$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
+          new_version=${{ steps.test.outputs.new_version }} 
           sed -i "s/$current_version/$new_version/g" pom.xml
           echo "Version number updated from $current_version to $new_version"
-          echo "::set-output name=new_ver::$new_version"
 
       - name: Build and Run Unit Tests
         run: mvn -B clean compile test
@@ -48,5 +44,5 @@ jobs:
           add: 'pom.xml version.json'
           author_name: Release Workflow
           author_email: unifiedid-admin+release@thetradedesk.com
-          message: 'Updated version to ${{ steps.version.outputs.new_ver }}'
+          message: 'Updated version to ${{ steps.test.outputs.new_version }}'
 
