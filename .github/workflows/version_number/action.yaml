@@ -47,11 +47,8 @@ runs:
       if: inputs.type == 'Snapshot'
       shell: bash
       run: |
-        echo "new_version=$NBGV_SimpleVersion-SNAPSHOT" >> $GITHUB_OUTPUT
-
-    - name: Set version number for Major, Minor or Patch
-      id: version
-      if: inputs.type != 'Snapshot'
-      shell: bash
-      run: |
-        echo "new_version=$NBGV_SimpleVersion-$NBGV_GitCommitIdShort" >> $GITHUB_OUTPUT
+        if [[ "${{ github.event.inputs.type}}" == "Snapshot"]]; then
+          echo "new_version=$NBGV_SimpleVersion-SNAPSHOT" >> $GITHUB_OUTPUT
+        else
+          echo "new_version=$NBGV_SimpleVersion-$NBGV_GitCommitIdShort" >> $GITHUB_OUTPUT
+        fi
