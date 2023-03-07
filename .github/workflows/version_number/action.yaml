@@ -48,7 +48,6 @@ runs:
       run: |
         if [[ "${{ github.event.inputs.type }}" == "Snapshot" ]]; then
           echo "new_version=$NBGV_SimpleVersion-SNAPSHOT" >> $GITHUB_OUTPUT
-        fi
-        if [[ "${{ github.event.inputs.device }}" != "Snapshot" ]]; then
+        else
           echo "new_version=$NBGV_SimpleVersion-$NBGV_GitCommitIdShort" >> $GITHUB_OUTPUT
         fi
