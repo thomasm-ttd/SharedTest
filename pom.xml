@@ -5,7 +5,7 @@
 
     <groupId>com.uid2</groupId>
     <artifactId>uid2-shared</artifactId>
-    <version>2.3.0-cce8533498</version>
+    <version>2.4.0-dd6d9dfd62</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Library for all the shared uid2 operations</description>
