@@ -46,12 +46,12 @@ runs:
       if: inputs.type == 'Snapshot'
       shell: bash
       run: |
-        new_version="$NBGV_SimpleVersion-SNAPSHOT"
+        new_version=$(echo $NBGV_SimpleVersion-SNAPSHOT)
         echo "{new_version}={$new_version}"
 
     - name: Set version number for Major, Minor or Patch
       if: inputs.type != 'Snapshot'
       shell: bash
       run: |
-        new_version="$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
+        new_version=$(echo $NBGV_SimpleVersion-$NBGV_GitCommitIdShort)
         echo "{new_version}={$new_version}"
