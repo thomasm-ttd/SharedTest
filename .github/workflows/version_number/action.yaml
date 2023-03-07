@@ -1,4 +1,5 @@
 name: Get Version number
+description: Returns the version number to use as an output
 # This action uses Nerdbank.Gitversioning to determine the version number
 # Outputs a value: new_version that is the complete version number
 inputs:
@@ -14,6 +15,7 @@ runs:
   steps:
     - name: Update Major Version
       if: inputs.type == 'Major'
+      shell: bash
       run: |
         old_ver=$(jq '.version' version.json | tr -d '"')
         new_ver=$(echo $old_ver | cut -d'.' -f 1) #get the major number
@@ -23,6 +25,7 @@ runs:
         echo $(jq ".version=$new_ver" version.json) > version.json
     - name: Update Minor Version
       if: inputs.type == 'Minor'
+      shell: bash
       run: |
         old_ver=$(jq '.version' version.json | tr -d '"')
         new_ver=$(echo $old_ver | awk -F. -v OFS=. '{$NF++; print $0}') # minor
@@ -35,16 +38,20 @@ runs:
         setAllVars: true
     
     - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
+      shell: bash
     - run: env
+      shell: bash
 
     - name: Set version number for snapshot
       if: inputs.type == 'Snapshot'
+      shell: bash
       run: |
         new_version="$NBGV_SimpleVersion-SNAPSHOT"
         echo "::set-output name=new_ver::$new_version"
 
     - name: Set version number for Major, Minor or Patch
       if: inputs.type != 'Snapshot'
+      shell: bash
       run: |
         new_version="$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
         echo "::set-output name=new_ver::$new_version"
