@@ -13,31 +13,28 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set Version
-        uses: dotnet/nbgv@master
+      - name: Set patch version number
+        id: version
+        uses: ./.github/workflows/version_number
         with:
-          setAllVars: true
-      
-      - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
-      - run: env
+          type: 'Patch'
 
       - name: Update pom.xml
         id: version
         run: |
           current_version=$(grep -o '<version>.*</version>' pom.xml | head -1 | sed 's/<version>\(.*\)<\/version>/\1/')
-          new_version="$NBGV_SimpleVersion-$NBGV_GitCommitIdShort"
+          new_version=${{ steps.version.outputs.new_version }} 
           sed -i "s/$current_version/$new_version/g" pom.xml
           echo "Version number updated from $current_version to $new_version"
-          echo "::set-output name=new_ver::$new_version"
 
       - name: Build and Run Unit Tests
         run: mvn -B clean compile test
 
-      - name: Commit Pom.xml
+      - name: Commit Pom.xml and version.json
         uses: EndBug/add-and-commit@v9
         with:
-          add: 'pom.xml'
+          add: 'pom.xml version.json'
           author_name: Release Workflow
           author_email: unifiedid-admin+release@thetradedesk.com
-          message: 'Updated version to ${{ steps.version.outputs.new_ver }}'
+          message: 'Updated version to ${{ steps.version.outputs.new_version }}'
 

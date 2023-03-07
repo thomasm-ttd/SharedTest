@@ -13,8 +13,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Test action
-        id: test
+      - name: Set major version number
+        id: version
         uses: ./.github/workflows/version_number
         with:
           type: 'Major'
@@ -23,7 +23,7 @@ jobs:
         id: version
         run: |
           current_version=$(grep -o '<version>.*</version>' pom.xml | head -1 | sed 's/<version>\(.*\)<\/version>/\1/')
-          new_version=${{ steps.test.outputs.new_version }} 
+          new_version=${{ steps.version.outputs.new_version }} 
           sed -i "s/$current_version/$new_version/g" pom.xml
           echo "Version number updated from $current_version to $new_version"
 
@@ -36,5 +36,5 @@ jobs:
           add: 'pom.xml version.json'
           author_name: Release Workflow
           author_email: unifiedid-admin+release@thetradedesk.com
-          message: 'Updated version to ${{ steps.test.outputs.new_version }}'
+          message: 'Updated version to ${{ steps.version.outputs.new_version }}'
 
