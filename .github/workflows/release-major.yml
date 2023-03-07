@@ -13,11 +13,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Update Minor Version
+      - name: Update Major Version
         run: |
           old_ver=$(jq '.version' version.json | tr -d '"')
-          new_ver=$(echo $old_ver | cut -d'.' -f 1)
-          new_ver=$(echo $new_ver.0)
+          new_ver=$(echo $old_ver | cut -d'.' -f 1) #get the major number
+          new_ver=$(echo $(expr $new_ver + 1))      #increment
+          new_ver=$(echo $new_ver.0)                #set minor version to 0
           new_ver=\"$new_ver\"
           echo $(jq ".version=$new_ver" version.json) > version.json
 
