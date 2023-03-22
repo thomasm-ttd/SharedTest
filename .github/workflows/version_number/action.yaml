@@ -49,5 +49,5 @@ runs:
         if [[ "${{ inputs.type }}" == "Snapshot" ]]; then
           echo "new_version=$NBGV_SimpleVersion-SNAPSHOT" >> $GITHUB_OUTPUT
         else
-          echo "new_version=$NBGV_SimpleVersion-$NBGV_GitCommitIdShort" >> $GITHUB_OUTPUT
+          echo "new_version=$NBGV_SimpleVersion" >> $GITHUB_OUTPUT
         fi
