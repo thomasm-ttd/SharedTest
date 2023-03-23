@@ -35,5 +35,5 @@ jobs:
           add: 'pom.xml version.json'
           author_name: Release Workflow
           author_email: unifiedid-admin+release@thetradedesk.com
-          message: 'Updated version to ${{ steps.version.outputs.new_version }}'
+          message: 'Released Major version: ${{ steps.version.outputs.new_version }}'
 
