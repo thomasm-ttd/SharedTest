@@ -5,7 +5,7 @@ on:
 
 jobs:
   build: 
-    uses: thomas-ttd/SharedWorkflows/.github/workflows/shared-release.yaml@main
+    uses: thomasm-ttd/SharedWorkflows/.github/workflows/shared-release.yaml@main
     with:
       type: 'Patch'
     secrets: inherit
