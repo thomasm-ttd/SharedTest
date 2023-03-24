@@ -5,35 +5,7 @@ on:
 
 jobs:
   build: 
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Set Snapshot version number
-        id: version
-        uses: ./.github/workflows/version_number
-        with:
-          type: 'Snapshot'
-
-      - name: Update pom.xml
-        run: |
-          current_version=$(grep -o '<version>.*</version>' pom.xml | head -1 | sed 's/<version>\(.*\)<\/version>/\1/')
-          new_version=${{ steps.version.outputs.new_version }} 
-          sed -i "s/$current_version/$new_version/g" pom.xml
-          echo "Version number updated from $current_version to $new_version"
-
-      - name: Build and Run Unit Tests
-        run: mvn -B clean compile test
-
-      - name: Commit Pom.xml and version.json
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: 'pom.xml version.json'
-          author_name: Release Workflow
-          author_email: unifiedid-admin+release@thetradedesk.com
-          message: 'Released SNAPSHOT version: ${{ steps.version.outputs.new_version }}'
-
+    uses: thomasm-ttd/SharedWorkflows/.github/workflows/shared-release.yaml@main
+    with:
+      release_type: 'Snapshot'
+    secrets: inherit
