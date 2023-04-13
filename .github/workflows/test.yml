@@ -1,0 +1,11 @@
+name: Test Java
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Java Version
+        run: Java -version
