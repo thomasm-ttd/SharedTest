@@ -39,6 +39,9 @@ public class ClientKey implements IRoleAuthorizable<Role> {
         this.siteId = -1;
     }
 
+    // test secret (not a real secret)
+    // example = 3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w=
+
     public ClientKey withName(String name) { this.name = name; return this; }
     public ClientKey withContact(String contact) { this.contact = contact; return this; }
     public ClientKey withNameAndContact(String name) { this.name = this.contact = name; return this; }
