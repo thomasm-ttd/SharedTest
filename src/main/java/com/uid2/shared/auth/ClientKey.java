@@ -39,15 +39,15 @@ public class ClientKey implements IRoleAuthorizable<Role> {
         this.siteId = -1;
     }
 
-    // test secret (not a real secret)
-    // example = 3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w=
-
     public ClientKey withName(String name) { this.name = name; return this; }
     public ClientKey withContact(String contact) { this.contact = contact; return this; }
     public ClientKey withNameAndContact(String name) { this.name = this.contact = name; return this; }
     public ClientKey withRoles(Role... roles) { this.roles = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(roles))); return this; }
     public ClientKey withRoles(Set<Role> roles) { this.roles = Collections.unmodifiableSet(roles); return this; }
     public ClientKey withSiteId(int siteId) { this.siteId = siteId; return this; }
+
+    // test secret (not a real secret)
+    // example = 3riI71BXed5ebIOYwQntykeZuhjsdweEc9BxH5Jc26w=
 
     public ClientKey(String key, String secret, String contact, Role... roles) {
         this(key, secret, contact, contact, Instant.parse("2021-01-01T00:00:00.000Z"), new HashSet<Role>(Arrays.asList(roles)), 0, false);
