@@ -5,6 +5,7 @@ on:
 
 jobs:
   build: 
+    if: github.ref == 'refs/heads/master'
     uses: thomasm-ttd/SharedWorkflows/.github/workflows/shared-release.yaml@main
     with:
       release_type: 'Patch'
